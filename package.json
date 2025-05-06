@@ -10,7 +10,7 @@
         "url": "https://github.com/dawidjaniga/philips-hue-remote.git"
     },
     "scripts": {
-        "dev": "vite",
+        "dev": "vite build --watch",
         "build": "vite build",
         "test": "vitest",
         "check": "svelte-check --tsconfig ./tsconfig.json"
