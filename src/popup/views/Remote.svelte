@@ -2,6 +2,8 @@
   import { fade } from "svelte/transition";
   import { hueClient } from "../app";
   import ColorWheel from "../components/ColorWheel.svelte";
+  import Layout from "../components/Layout.svelte";
+  import Button from "../../components/Button.svelte";
 
   async function getDevices() {
     console.log("devices", await hueClient.getDevices());
@@ -20,16 +22,19 @@
   }
 </script>
 
-<div in:fade>
-  <h2>Remote</h2>
-  <button on:click={getDevices}>Get Devices</button>
-  <button on:click={logItself}>Log Hue</button>
-
-  <button on:click={turnOffDeskLamp}>Turn Off Desk Lamp</button>
-  <button on:click={turnOnDeskLamp}>Turn On Desk Lamp</button>
-
-  <ColorWheel />
-</div>
+<Layout>
+  <div in:fade>
+    <h2 class="text-xl font-bold mb-4">Remote</h2>
+    <Button on:click={getDevices} className="mb-2">Get Devices</Button>
+    <Button on:click={logItself} className="mb-2">Log Hue</Button>
+    <Button on:click={turnOffDeskLamp} className="mb-2"
+      >Turn Off Desk Lamp</Button
+    >
+    <Button on:click={turnOnDeskLamp} className="mb-2">Turn On Desk Lamp</Button
+    >
+    <ColorWheel />
+  </div>
+</Layout>
 
 <style>
 </style>

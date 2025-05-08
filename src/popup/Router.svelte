@@ -14,11 +14,15 @@
     switch ($status) {
       case "installed":
         push("/home");
-
         break;
 
       case "loading": {
         push("/loading");
+        break;
+      }
+      case "not-installed": {
+        push("/link-bridge");
+        break;
       }
     }
   }

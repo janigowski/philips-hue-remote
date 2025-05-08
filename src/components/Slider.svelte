@@ -31,18 +31,18 @@
 <div
   bind:this={sliderRef}
   data-testid={testId}
-  class="relative h-2 bg-zinc-50 rounded-full cursor-pointer"
+  class="relative h-2 w-full bg-[#23272F] rounded-full cursor-pointer flex items-center"
   on:mousedown={handleMove}
   on:touchstart|preventDefault={handleMove}
   on:mousemove={(event) => event.buttons && handleMove(event)}
   on:touchmove|preventDefault={handleMove}
 >
   <div
-    class="absolute h-full bg-blue-500 rounded-full"
+    class="absolute h-2 bg-accent rounded-full"
     style="width: {fillWidth};"
   ></div>
   <div
-    class="absolute w-4 h-4 bg-white rounded-full shadow-md transform -translate-x-1/2 -translate-y-1/2"
-    style="left: {fillWidth}; top: 50%;"
+    class="absolute w-5 h-5 bg-[#23272F] rounded-full border-2 border-accent shadow-sm"
+    style="left: {fillWidth}; top: 50%; transform: translate(-50%, -50%);"
   ></div>
 </div>

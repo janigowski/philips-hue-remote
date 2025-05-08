@@ -1,24 +1,13 @@
 <script>
   import "../app.css";
   import Router from "./Router.svelte";
-  import Menu from "./components/Menu.svelte";
 </script>
 
-<div class="popup">
+<div class="popup card w-[500px] h-[700px] p-6 overflow-scroll">
   <Router />
-  <Menu />
 </div>
 
 <style>
-  .popup {
-    width: 500px;
-    height: 2000px;
-    background: #1b1a1a;
-    color: #fff;
-    padding: 20px;
-    overflow: scroll;
-  }
-
   :global(body) {
     margin: 0;
   }

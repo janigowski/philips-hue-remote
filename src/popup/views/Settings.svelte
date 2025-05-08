@@ -1,10 +1,13 @@
 <script>
   import { fade } from "svelte/transition";
+  import Layout from "../components/Layout.svelte";
 </script>
 
-<div in:fade>
-  <h3>Settings</h3>
-</div>
+<Layout>
+  <div in:fade>
+    <h3>Settings</h3>
+  </div>
+</Layout>
 
 <style>
 </style>

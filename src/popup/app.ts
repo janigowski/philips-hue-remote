@@ -7,7 +7,7 @@ import type { Room } from './interfaces'
 
 export const hueClient = new PhilipsHueClient()
 
-export type AppStatus = 'loading' | 'installed'
+export type AppStatus = 'loading' | 'installed' | 'not-installed'
 
 const debug = createDebug('philips-hue-remote:app')
 
@@ -16,11 +16,11 @@ class App {
   public rooms = new Collection<Room>()
   public bridge?: BridgeController
 
-  constructor () {
+  constructor() {
     this.init()
   }
 
-  async init () {
+  async init() {
     debug('init')
 
     const [bridgeIp, appKey] = await Promise.all([
@@ -31,17 +31,19 @@ class App {
     debug('bridge IP', bridgeIp)
     debug('app key', appKey)
 
-    hueClient.setBridgeIpAddress(bridgeIp)
-    hueClient.setAppKey(appKey)
 
     if (bridgeIp && appKey) {
+      hueClient.setBridgeIpAddress(bridgeIp)
+      hueClient.setAppKey(appKey)
       this.bridge = new BridgeController(bridgeIp, appKey)
       await this.bridge.connect()
       this.status.set('installed')
+    } else {
+      this.status.set('not-installed')
     }
   }
 
-  async saveBridgeIp (ip: string): Promise<void> {
+  async saveBridgeIp(ip: string): Promise<void> {
     hueClient.setBridgeIpAddress(ip)
     await chrome.storage.local.set({
       bridgeIp: ip
@@ -50,12 +52,12 @@ class App {
     debug('bridge IP set:', ip)
   }
 
-  async getBridgeIp (): Promise<string> {
+  async getBridgeIp(): Promise<string> {
     const result = await chrome.storage.local.get(['bridgeIp'])
     return result.bridgeIp
   }
 
-  async saveAppKey (appKey: string): Promise<void> {
+  async saveAppKey(appKey: string): Promise<void> {
     hueClient.setAppKey(appKey)
 
     await chrome.storage.local.set({
@@ -65,7 +67,7 @@ class App {
     debug('app key set:', appKey)
   }
 
-  async getAppKey (): Promise<string> {
+  async getAppKey(): Promise<string> {
     const result = await chrome.storage.local.get(['hueAppKey'])
 
     return result.hueAppKey
